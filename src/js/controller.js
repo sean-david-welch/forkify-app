@@ -1,13 +1,11 @@
-// https://forkify-api.herokuapp.com/v2
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import { async } from 'regenerator-runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
-// use fetch function that returns a promise and use async await to handle the promise
 const controlRecipes = async () => {
     try {
         const id = window.location.hash.slice(1);
@@ -26,7 +24,24 @@ const controlRecipes = async () => {
     }
 };
 
+const controlSearchResults = async () => {
+    try {
+        // 1. Get search query
+        const query = searchView.getQuery();
+        if (!query) return;
+
+        // 2. Load search results
+        await model.loadSerachResults(query);
+
+        // 3. Render results
+        console.log(model.state.search.results);
+    } catch {
+        console.log(err);
+    }
+};
+
 const init = () => {
     recipeView.addHandlerRender(controlRecipes);
+    searchView.addHandlerSearch(controlSearchResults);
 };
 init();
