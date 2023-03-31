@@ -1,0 +1,16 @@
+{
+    "name": "forkify",
+    "version": "1.0.0",
+    "description": "app i followed in a course",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "dependencies": {
+        "parcel": "^2.8.3"
+    },
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.8.3"
+    }
+}
